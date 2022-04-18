@@ -45,7 +45,11 @@ var ans2 = document.createElement("button");
 var ans3 = document.createElement("button");
 var ans4 = document.createElement("button");
 
+var timerEl = document.querySelector('#timer');
+var time = 75;
+
 var scoresEl = document.querySelector('#scores');
+var finalScoreEl = document.querySelector('#finalScore');
 
 function setQuestion(questionInd) {
     questionEl.textContent = questions[questionInd].question;

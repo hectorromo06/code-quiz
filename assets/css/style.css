@@ -17,3 +17,16 @@
     margin-left: 35%;
     margin-right: 35%;
 }
+
+#done form {
+    display: flex;
+    flex-direction: column;
+}
+
+#done form input {
+    margin-bottom: 10%;
+}
+
+#done form div {
+    flex-direction: row;
+}

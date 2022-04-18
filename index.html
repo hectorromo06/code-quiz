@@ -14,7 +14,7 @@
 <body>
     <header>
         <a href="./highScores.html" class="uk-position-small uk-position-top-left">View high scores</a>
-        <p class="uk-position-small uk-position-top-right">Time: <span id="timer">0</span></p>
+        <p class="uk-position-small uk-position-top-right">Time: <span id="timer"></span></p>
     </header>
 
     <section class="uk-position-center uk-text-center">
@@ -37,7 +37,15 @@
         </div>
 
         <div id="done" class="uk-hidden">
-            <h1>YAY</h1>
+            <h1>All Done!</h1>
+            <p>Your final score is <span id="finalScore"></span>.</p>
+            <form>
+                <div>
+                    <label for="intials">Enter intials:</label>
+                    <input type="text" placeholder="Your Initals" name="initals" id="initals" />
+                </div>
+                <button type="submit" class="uk-button uk-button-default">Submit</button>
+            </form>
         </div>
     </section>
 
