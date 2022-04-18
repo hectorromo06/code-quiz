@@ -75,24 +75,44 @@ function setQuestion(questionInd) {
     answersEl.appendChild(ans4);
 }
 
-function reset(questionInd) {
+function reset() {
     respDivEl.setAttribute('class', 'uk-hidden');
     correctEl.setAttribute('class', 'uk-hidden');
     wrongEl.setAttribute('class', 'uk-hidden');
+}
 
-    if (questionInd < questions.length) {
-        setQuestion(questionInd);
-    } else {
-        quizDivEl.setAttribute('class', 'uk-hidden');
-        doneDivEl.setAttribute('class', 'uk-visible');
-    }
+function timedQuiz(){
+    var timeInterval = setInterval(function() {
+
+        if (time > 1) {
+            timerEl.textContent = time;
+            
+            if (questionInd < questions.length) {
+                setQuestion(questionInd);
+            } else {
+                finalScoreEl.textContent = time;
+                quizDivEl.setAttribute('class', 'uk-hidden');
+                doneDivEl.setAttribute('class', 'uk-visible');
+                clearInterval(timeInterval);
+            }
+
+            reset(); 
+            time--;
+        } else {
+            finalScoreEl.textContent = time;
+            quizDivEl.setAttribute('class', 'uk-hidden');
+            doneDivEl.setAttribute('class', 'uk-visible');
+            clearInterval(timeInterval);
+        }  
+
+    }, 1000);
 }
 
 startBtnEl.addEventListener('click', function() {
     beginDivEl.setAttribute('class', 'uk-hidden');
     quizDivEl.setAttribute('class', 'uk-visible');
 
-    setQuestion(questionInd);
+    timedQuiz();
 });
 
 answersEl.addEventListener('click', function(event) {
@@ -108,9 +128,8 @@ answersEl.addEventListener('click', function(event) {
         correctEl.setAttribute('class', 'uk-visible');
     } else if (questions[clicked].right != ans) {
         wrongEl.setAttribute('class', 'uk-visible');
+        time = time - 15;
     }
 
     questionInd++;
-
-    reset(questionInd);
 });
