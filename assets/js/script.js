@@ -48,7 +48,6 @@ var ans4 = document.createElement("button");
 var timerEl = document.querySelector('#timer');
 var time = 75;
 
-var scoresEl = document.querySelector('#scores');
 var finalScoreEl = document.querySelector('#finalScore');
 var finalScore;
 var highScores = [];
@@ -142,9 +141,7 @@ answersEl.addEventListener('click', function(event) {
     questionInd++;
 });
 
-submitBtnEl.addEventListener('click', function(event) {
-    event.preventDefault();
-
+submitBtnEl.addEventListener('click', function() {
     var highScore = {
         initial: document.querySelector('input').value,
         score: finalScoreEl.textContent
@@ -152,7 +149,7 @@ submitBtnEl.addEventListener('click', function(event) {
 
     var temp = localStorage.getItem("highScores");
     if (temp != null) {
-        users = JSON.parse(temp);
+        highScores = JSON.parse(temp);
     }
 
     highScores.push(highScore);
