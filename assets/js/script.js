@@ -47,31 +47,48 @@ var ans4 = document.createElement("button");
 
 var scoresEl = document.querySelector('#scores');
 
-startBtnEl.addEventListener('click', function() {
-    beginDivEl.setAttribute('class', 'uk-hidden');
-    quizDivEl.setAttribute('class', 'uk-visible');
-
+function setQuestion(questionInd) {
     questionEl.textContent = questions[questionInd].question;
-
+    
     ans1.textContent = questions[questionInd].answers[0];
     ans2.textContent = questions[questionInd].answers[1];
     ans3.textContent = questions[questionInd].answers[2];
     ans4.textContent = questions[questionInd].answers[3];
-
+    
     ans1.setAttribute('class', 'uk-button uk-button-primary');
     ans2.setAttribute('class', 'uk-button uk-button-primary');
     ans3.setAttribute('class', 'uk-button uk-button-primary');
     ans4.setAttribute('class', 'uk-button uk-button-primary');
-
+    
     ans1.setAttribute('data-number', questionInd);
     ans2.setAttribute('data-number', questionInd);
     ans3.setAttribute('data-number', questionInd);
     ans4.setAttribute('data-number', questionInd);
-
+    
     answersEl.appendChild(ans1);
     answersEl.appendChild(ans2);
     answersEl.appendChild(ans3);
     answersEl.appendChild(ans4);
+}
+
+function reset(questionInd) {
+    respDivEl.setAttribute('class', 'uk-hidden');
+    correctEl.setAttribute('class', 'uk-hidden');
+    wrongEl.setAttribute('class', 'uk-hidden');
+
+    if (questionInd < questions.length) {
+        setQuestion(questionInd);
+    } else {
+        quizDivEl.setAttribute('class', 'uk-hidden');
+        doneDivEl.setAttribute('class', 'uk-visible');
+    }
+}
+
+startBtnEl.addEventListener('click', function() {
+    beginDivEl.setAttribute('class', 'uk-hidden');
+    quizDivEl.setAttribute('class', 'uk-visible');
+
+    setQuestion(questionInd);
 });
 
 answersEl.addEventListener('click', function(event) {
@@ -88,4 +105,8 @@ answersEl.addEventListener('click', function(event) {
     } else if (questions[clicked].right != ans) {
         wrongEl.setAttribute('class', 'uk-visible');
     }
+
+    questionInd++;
+
+    reset(questionInd);
 });
