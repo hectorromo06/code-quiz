@@ -50,6 +50,11 @@ var time = 75;
 
 var scoresEl = document.querySelector('#scores');
 var finalScoreEl = document.querySelector('#finalScore');
+var finalScore;
+var highScores = [];
+
+var initialsEl = document.querySelector('#initials')
+var submitBtnEl = document.querySelector('#submit');
 
 function setQuestion(questionInd) {
     questionEl.textContent = questions[questionInd].question;
@@ -91,6 +96,7 @@ function timedQuiz(){
                 setQuestion(questionInd);
             } else {
                 finalScoreEl.textContent = time;
+                finalScore = time;
                 quizDivEl.setAttribute('class', 'uk-hidden');
                 doneDivEl.setAttribute('class', 'uk-visible');
                 clearInterval(timeInterval);
@@ -99,7 +105,9 @@ function timedQuiz(){
             reset(); 
             time--;
         } else {
-            finalScoreEl.textContent = time;
+            finalScoreEl.textContent = 0;
+            finalScore = 0;
+            timerEl.textContent = 0;
             quizDivEl.setAttribute('class', 'uk-hidden');
             doneDivEl.setAttribute('class', 'uk-visible');
             clearInterval(timeInterval);
@@ -132,4 +140,22 @@ answersEl.addEventListener('click', function(event) {
     }
 
     questionInd++;
+});
+
+submitBtnEl.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var highScore = {
+        initial: document.querySelector('input').value,
+        score: finalScoreEl.textContent
+    }
+
+    var temp = localStorage.getItem("highScores");
+    if (temp != null) {
+        users = JSON.parse(temp);
+    }
+
+    highScores.push(highScore);
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
 });
