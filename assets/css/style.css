@@ -1,0 +1,19 @@
+#quiz {
+    display: flex;
+    flex-direction: column;
+}
+
+#question {
+    padding: 0 15%;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+}
+
+#answers button {
+    margin-bottom: 2%;
+    margin-left: 35%;
+    margin-right: 35%;
+}
